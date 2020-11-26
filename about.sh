@@ -1,0 +1,30 @@
+#!/bin/bash
+#About this script
+
+clear
+echo -e "Script Auto Install SSH & OpenVPN " 
+echo -e ""
+echo -e "For Debian 9 32 bit & 64 bit" 
+echo -e "For VPS with KVM and VMWare virtualization" 
+echo -e ""
+echo -e "Original script by :" 
+echo -e "* Fornesia" 
+echo -e "* Rzengineer" 
+echo -e "* Fawzya" 
+echo -e ""
+echo -e "Mod by Rizwan Arif Firmansyah" 
+echo -e ""
+echo -e "   ██   ██  █████  ██████   █████  ██  " | 
+echo -e "   ██  ██  ██   ██ ██   ██ ██   ██ ██          " 
+echo -e "   █████   ███████ ██   ██ ███████ ██           " 
+echo -e "   ██  ██   ██   ██ ██   ██ ██   ██ ██   " 
+echo -e "   ██   ██ ██   ██ ██████  ██   ██ ███████     " 
+echo -e ""
+echo -e " ███████  █████  ███    ███ ██ ██   ██    ██ " 
+echo -e " ██      ██   ██ ████  ████ ██ ██    ██  ██  " 
+echo -e " █████   ███████ ██ ████ ██ ██ ██     ████   " 
+echo -e " ██      ██   ██ ██  ██  ██ ██ ██      ██    " 
+echo -e " ██      ██   ██ ██      ██ ██ ███████ ██    " 
+echo -e "                                      The Big Kadall Family Grup™" 
+echo -e ""
+echo -e " No Wa 083145968517" 

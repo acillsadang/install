@@ -50,6 +50,6 @@ echo "------------------------------------------------"
 
 echo "";
 
-echo "Mod by Rizwan Arif Firmansyah" | ;
+echo "Mod by Rizwan Arif Firmansyah" 
 
 echo "";

@@ -77,8 +77,8 @@ apt-get -y install nano iptables-persistent dnsutils screen whois ngrep unzip un
 
 echo "clear" >> .bashrc
 echo 'echo -e ""' >> .bashrc
-echo 'echo -e "   ██   ██  █████  ██████   █████  ██  "  '>> .bashrc
-echo 'echo -e "   ██  ██  ██   ██ ██   ██ ██   ██ ██          " | lolcat ' >> .bashrc
+echo 'echo -e "   ██   ██  █████  ██████   █████  ██  "  ' >> .bashrc
+echo 'echo -e "   ██  ██  ██   ██ ██   ██ ██   ██ ██          " ' >> .bashrc
 echo 'echo -e "   █████   ███████ ██   ██ ███████ ██           "  ' >> .bashrc
 echo 'echo -e "   ██  ██   ██   ██ ██   ██ ██   ██ ██   " ' >> .bashrc
 echo 'echo -e "   ██   ██ ██   ██ ██████  ██   ██ ███████     " ' >> .bashrc
@@ -233,10 +233,6 @@ wget -O /etc/stunnel/ssl.conf "https://raw.githubusercontent.com/acillsadang/ins
 sed -i $MYIP2 /etc/stunnel/ssl.conf;
 cp ssl.conf /home/vps/public_html/
 cd
-
-# colored text
-apt-get -y install ruby
-gem install lolcat
 
 # install fail2ban
 apt-get -y install fail2ban

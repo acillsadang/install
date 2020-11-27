@@ -233,6 +233,25 @@ wget -O /etc/stunnel/ssl.conf "https://raw.githubusercontent.com/acillsadang/ins
 sed -i $MYIP2 /etc/stunnel/ssl.conf;
 cp ssl.conf /home/vps/public_html/
 cd
+# configure vpnsstp
+wget "http://www.softether-download.com/files/softether/v4.34-9745-rtm-2020.04.05-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.34-9745-rtm-2020.04.05-linux-x64-64bit.tar.gz" -O softether-vpnserver-linux.tar.gz
+tar -xvf softether-vpnserver-linux.tar.gz
+rm -f softether-vpnserver-linux.tar.gz
+cd vpnserver
+printf "1\n1\n1\n" | make
+cd
+mv vpnserver /usr/local
+cd /usr/local/vpnserver/
+chmod 600 *
+chmod 700 vpnserver
+chmod 700 vpncmd
+wget -O /etc/init.d/vpnserver "https://raw.githubusercontent.com/acillsadang/install/master/vpnserver"
+chmod +x /etc/init.d/vpnserver
+/etc/init.d/vpnserver start
+systemctl enable vpnserver
+(printf "1\n\n\n"; sleep 0.5; printf "ServerPasswordSet\n$pass\n$pass\n"; sleep 0.5; printf "HubCreate $psk\n$pass\n$pass\n"; sleep 0.5; printf "Hub $psk\n"; sleep 0.5; printf "SecureNatEnable\n"; sleep 0.5; printf "IPsecEnable\nyes\nyes\nyes\n$psk\n$psk\n"; sleep 0.5; printf "ServerCertRegenerate $MYIP\n"; sleep 0.5; printf "ServerCertGet ~/cert.cer\n"; sleep 0.5; printf "SstpEnable yes\n"; sleep 0.5; printf "OpenVpnEnable no\nDisable\n") | ./vpncmd
+zip /home/vps/public_html/cert.zip ~/cert.cer
+cd
 
 # install fail2ban
 apt-get -y install fail2ban

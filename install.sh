@@ -199,6 +199,7 @@ RUN=yes
 DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:444 --ssl 127.0.0.1:445 --openvpn 127.0.0.1:1195 --pidfile /var/run/sslh/sslh.pid"
 
 END
+
 # install squid
 apt-get -y install squid
 wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/acillsadang/install/master/squid3.conf"

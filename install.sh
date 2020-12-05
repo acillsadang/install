@@ -183,6 +183,16 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 
+# install sslh multiport
+apt-get -y install sslh
+cat > /etc/default/sslh <<-END
+RUN=yes
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:444 --ssl 127.0.0.1:445 --openvpn 127.0.0.1:1195 --pidfile /var/run/sslh/sslh.pid"
+
+END
+
+/etc/init.d/sslh restart
+
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
@@ -191,14 +201,6 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 456 -p 999"/g' /etc/defau
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
-
-# install sslh multiport
-apt-get -y install sslh
-cat > /etc/default/sslh <<-END
-RUN=yes
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:444 --ssl 127.0.0.1:445 --openvpn 127.0.0.1:1195 --pidfile /var/run/sslh/sslh.pid"
-
-END
 
 # install squid
 apt-get -y install squid

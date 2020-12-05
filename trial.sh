@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #Script auto create trial user SSH
 #will expired after 1 day
 #modified by Rizwan Arif Firmansyah

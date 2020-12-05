@@ -191,7 +191,13 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 456 -p 999"/g' /etc/defau
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
+# install sslh multiport
+apt-get -y install sslh
+cat > /etc/default/sslh <<-END
+RUN=yes
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:444 --ssl 127.0.0.1:445 --openvpn 127.0.0.1:1195 --pidfile /var/run/sslh/sslh.pid"
 
+END
 # install squid
 apt-get -y install squid
 wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/acillsadang/install/master/squid3.conf"
@@ -211,7 +217,7 @@ socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 
 [dropbear]
-accept = 443
+accept = 445
 connect = 127.0.0.1:143
 
 [openvpn]
@@ -301,6 +307,7 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/cron restart
 /etc/init.d/ssh restart
 /etc/init.d/dropbear restart
+/etc/init.d/sslh restart
 /etc/init.d/fail2ban restart
 /etc/init.d/webmin restart
 /etc/init.d/stunnel4 restart
@@ -335,13 +342,13 @@ echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
 echo "-------"  | tee -a log-install.txt
 echo "OpenSSH  : 22"  | tee -a log-install.txt
-echo "Dropbear : 143, 456, 999"  | tee -a log-install.txt
+echo "Dropbear : 143, ,443, 456, 999"  | tee -a log-install.txt
 echo "SSL      : 443"  | tee -a log-install.txt
 echo "OpenVPNSSL : 990"  | tee -a log-install.txt
-echo "Squid3   : 80, 8080 (limit to IP SSH)"  | tee -a log-install.txt
+echo "Squid3   : 8000, 8080 (limit to IP SSH)"  | tee -a log-install.txt
 echo "SSL      : http://$MYIP:81/ssl.conf"  | tee -a log-install.txt
 echo "OpenVPNSSL: http://$MYIP:81/openvpnssl.ovpn"  | tee -a log-install.txt
-echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.ovpn)"  | tee -a log-install.txt
+echo "OpenVPN  : TCP 1194  , 1195 (client config : http://$MYIP:81/client.ovpn)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7200"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Script"  | tee -a log-install.txt

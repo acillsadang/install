@@ -184,7 +184,7 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 
 # install sslh multiport
-apt-get -y install sslh
+apt-get install sslh -y
 cat > /etc/default/sslh <<-END
 RUN=yes
 DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:444 --ssl 127.0.0.1:445 --openvpn 127.0.0.1:1195 --pidfile /var/run/sslh/sslh.pid"
